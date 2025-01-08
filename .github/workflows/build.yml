@@ -19,7 +19,6 @@ jobs:
           distribution: 'temurin'
           java-version: '23'
           cache: gradle
-
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
@@ -62,7 +61,7 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
-    #needs: test
+#   needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -77,9 +76,6 @@ jobs:
       - name: Package with Gradle
         run: ./gradlew bootJar
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -92,4 +88,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/spring-rag:latest
+#          tags: ${{ secrets.DOCKER_USERNAME }}/spring-rag:latest
